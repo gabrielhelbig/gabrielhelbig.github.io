@@ -1,13 +1,25 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
-        <meta charset="utf-8"
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>My Website</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
-        <script rel="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"></script>
-        <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+        <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
         <script defer src="app.js"></script>
+
+        <style type="text/css">
+            #map {
+                height: 400px;
+            }
+            #mypopover {
+                width: 150px;
+                height: 150px;
+                margin: 0;
+                padding: 1em;
+            }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -21,18 +33,32 @@
                         <h2>Cookies</h2>
                         <p id="old-cookies"></p>
                         <p id="new-cookies"></p>
+
                     </div>
                     <div class="column">
                         <h2>Geolocation</h2>
                         <div id="map"></div>
+
                     </div>
                 </div>
                 <div class="columns">
                     <div class="column">
                         <h2>Battery Status</h2>
+
                     </div>
                     <div class="column">
                         <h2>Popover</h2>
+
+                        <p>This is an HTML-only version of a popover:<br/>
+                            <button class="button" popovertarget="mypopover">Toggle the popover</button>
+                        </p>
+                        <div id="mypopover" popover>This is the Pop Over content</div>
+
+                        <p>To see a popover triggered by JavaScript, hit <kbd>?</kbd></p>
+                        <div id='js-popover' class="notification is-primary" popover>
+                            Hello from JavaScript.
+                        </div>
+
                     </div>
                 </div>
             </div>
