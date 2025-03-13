@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     
     // Look-style cookies / CookieStore
     const cookieStore = window.cookieStore;
-
     cookieStore.set({name: 'username', value: 'gabrielhelbig'})
     .then(
         () => { console.log("Cookie set using cookieStore"); },
@@ -19,5 +18,24 @@ document.addEventListener('DOMContentLoaded', (event) => {
             elt.innerText = `${obj.name}=${obj.value}`
         },
         (reason) => { console.error("Unable to read cookie: " + reason)}
-    )
+    );
+
+    // Do the Geolocation stuff
+    let map = null;
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+            const markerLocation = [position.coords.latitude, position.coords.longitude];
+            map = L.map('map').setView(markerLocation, 8);
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            L.marker(markerLocation).addTo(map);
+        }, 
+        (error) => { 
+            map = null;
+            document.getElementById('map').innerText = "Unable to load map.";
+            console.error('Unable to get user position: ' + error);
+        }
+    );
 });
